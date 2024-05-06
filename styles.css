@@ -14,6 +14,23 @@
   padding: 10px; 
   border-radius: 5px; 
   background-color: #203c5a;
+  transition: background-color 0.2s;
+
+  /* hover */
+  &:hover {
+    background-color: #2e5f8b;
+  }
+  &:active {
+    transition: transform 0.2s ease;
+    transform: scale(0.9);
+  }
+
+  &:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+ 
+  
 }
 
 .audio-controls button i {
@@ -28,10 +45,4 @@
   height: 40px;
 }
 
-#recordButton.recording i::before {
-  content: "\f04c"; /* Ícone de pausa */
-}
 
-#recordButton i::before {
-  content: "\f130"; /* Ícone de microfone */
-}
