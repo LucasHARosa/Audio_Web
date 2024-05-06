@@ -6,18 +6,23 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Minha Aplicação Web</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-DahpiU/0J1Nk4OT+YveA6eiqEZAIhAiiSrRLMgA+DLaGGdYlB+QmV6h8I5lGv41MgNn0FqAwrjX/n8P2cT5c3Q==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
   <div id="app">
-    <button id="playButton">Reproduzir Áudio</button>
-    <button id="chooseFileButton">Escolher Áudio</button>
-    <button id="recordButton">Gravar Áudio</button>
-    <audio id="audioPlayer" controls>
-      <source src="yeah-boy-114748.mp3" type="audio/mpeg">
-    </audio>
-    <audio id="storeAudio" controls></audio>
-    <audio id="recordedAudio" controls></audio>
-</div>
-    <script src="script.js"></script>
+    <div class="audio-controls">
+        <button id="deleteButton"><i class="fas fa-trash-alt"></i></button>
+        <audio 
+          id="recordedAudio" 
+          controls
+          
+        ></audio>
+        <button id="recordButton"><i class="fas fa-microphone"></i></button>
+        <button id="sendButton"><i class="fas fa-paper-plane"></i></button>
+    </div>
+    
+  </div>
+  <script src="https://kit.fontawesome.com/584097edd0.js" crossorigin="anonymous"></script>
+  <script src="script.js"></script>
 </body>
 </html>
