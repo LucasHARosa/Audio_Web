@@ -7,26 +7,22 @@ document.addEventListener('DOMContentLoaded', function() {
 	let mediaRecorder;
 	let recordedChunks = [];
 	let control = "empty";
-	
 	sendButton.disabled = true;
-	
-	
+	ApiGet();
+
 	// Gravar/encerrar/limpar a gravação de áudio 
 	controlButton.addEventListener('click', function() {
 		if (control == "empty") {
 			startRecording();
-			iconControlButton.classList.remove('fa-microphone');
-			iconControlButton.classList.add('fa-stop');
+			iconControlButton.src = 'icones/stop.svg';
 		}
 		else if (control == "recording") {
 			stopRecording();
-			iconControlButton.classList.remove('fa-stop');
-			iconControlButton.classList.add('fa-trash-alt');
+			iconControlButton.src = 'icones/trash.svg';
 		} 
 		else if (control == "hasAudio") {
 			deleteAudio();
-			iconControlButton.classList.remove('fa-trash-alt');
-			iconControlButton.classList.add('fa-microphone');
+			iconControlButton.src = 'icones/microphone.svg';
 		}
 		updateButtonsState();
 	});
@@ -42,6 +38,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	});
 
 	function startRecording() {
+		controlButton.classList.add('recording');
 		navigator.mediaDevices.getUserMedia({ audio: true })
 			.then(function(stream) {
 				mediaRecorder = new MediaRecorder(stream);
@@ -61,11 +58,13 @@ document.addEventListener('DOMContentLoaded', function() {
 			.catch(function(err) {
 				console.error('Erro ao acessar o dispositivo de áudio.', err);
 			});
+		setTimeout(stopRecording, 60000)
 		
 		control = "recording";
 	}
 
 	function stopRecording() {
+		controlButton.classList.remove('recording');
 		if (mediaRecorder && mediaRecorder.state !== 'inactive') {
 			mediaRecorder.stop();
 			console.log('Gravação encerrada.');
@@ -88,11 +87,25 @@ document.addEventListener('DOMContentLoaded', function() {
 		}
 	}
 
-
-	// Esconder os botões de enviar e controlar áudio
 	function hideButtons() {
 		sendButton.style.display = 'none';
 		controlButton.style.display = 'none';
 	}
+
+	function hasAudio() {
+		control === "hasAudio";
+		iconControlButton.src = 'icones/trash.svg';
+		sendButton.disabled = true;
+		hideButtons();
+	}
   
+	function ApiGet() {
+		fetch('http://localhost:5000/api')
+			.then(response => response.json())
+			.then(data => {
+				recordedAudio.src = data.url;
+				hasAudio();
+			})
+			.catch(error => console.log('Erro:', error));
+	}
 });
