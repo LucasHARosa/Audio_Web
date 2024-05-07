@@ -13,11 +13,11 @@
   width: 40px;
   padding: 10px; 
   border-radius: 5px; 
-  background-color: #b2c9e2;
+  background-color: #053c77;
   transition: background-color 0.2s;
 
   &:hover {
-    background-color: #7eb2e0;
+    background-color: #0761af;
   }
   &:active {
     transition: transform 0.2s ease;
@@ -30,8 +30,9 @@
   }
 }
 
-.audio-controls button img {
-  width: 20px;
+.audio-controls button i {
+  font-size: 20px;
+  color: rgb(255, 255, 255);
 }
 
 
@@ -42,9 +43,9 @@
 
 
 @keyframes recordingAnimation {
-  0% { background-color: #b2c9e2; } 
-  50% { background-color: #f16969; } 
-  100% { background-color: #b2c9e2; }
+  0% {color: #fff; } 
+  50% {color: #f16969; } 
+  100% { color: #fff; }
 }
 
 .recording {

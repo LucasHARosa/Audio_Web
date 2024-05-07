@@ -14,15 +14,18 @@ document.addEventListener('DOMContentLoaded', function() {
 	controlButton.addEventListener('click', function() {
 		if (control == "empty") {
 			startRecording();
-			iconControlButton.src = 'icones/stop.svg';
+			iconControlButton.classList.remove('fa-microphone');
+			iconControlButton.classList.add('fa-stop');
 		}
 		else if (control == "recording") {
 			stopRecording();
-			iconControlButton.src = 'icones/trash.svg';
+			iconControlButton.classList.remove('fa-stop');
+			iconControlButton.classList.add('fa-trash');
 		} 
 		else if (control == "hasAudio") {
 			deleteAudio();
-			iconControlButton.src = 'icones/microphone.svg';
+			iconControlButton.classList.remove('fa-trash');
+			iconControlButton.classList.add('fa-microphone');
 		}
 		updateButtonsState();
 	});
@@ -38,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	});
 
 	function startRecording() {
-		controlButton.classList.add('recording');
+		iconControlButton.classList.add('recording');
 		navigator.mediaDevices.getUserMedia({ audio: true })
 			.then(function(stream) {
 				mediaRecorder = new MediaRecorder(stream);
@@ -64,11 +67,14 @@ document.addEventListener('DOMContentLoaded', function() {
 	}
 
 	function stopRecording() {
-		controlButton.classList.remove('recording');
+		iconControlButton.classList.remove('recording');
 		if (mediaRecorder && mediaRecorder.state !== 'inactive') {
 			mediaRecorder.stop();
 			console.log('Gravação encerrada.');
 			control = "hasAudio";
+			iconControlButton.classList.remove('fa-stop');
+			iconControlButton.classList.add('fa-trash');
+			updateButtonsState();
 			recordedChunks = [];
 		}
 	}
@@ -94,7 +100,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
 	function hasAudio() {
 		control === "hasAudio";
-		iconControlButton.src = 'icones/trash.svg';
+		iconControlButton.classList.remove('fa-microphone');
+		iconControlButton.classList.add('fa-trash');
 		sendButton.disabled = true;
 		hideButtons();
 	}
