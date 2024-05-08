@@ -20,7 +20,6 @@ document.addEventListener('DOMContentLoaded', function() {
 		} 
 		else if (control == "hasAudio") {
 			deleteAudio();
-			
 		}
 		updateButtonsState();
 	});
@@ -90,16 +89,13 @@ document.addEventListener('DOMContentLoaded', function() {
 		control === "hasAudio";
 		iconControlButton.src = 'icones/trash.svg';
 		sendButton.disabled = true;
-		hideButtons();
 	}
   
 	function ApiGet() {
-		fetch('http://localhost:5000/api')
-			.then(response => response.json())
-			.then(data => {
-				recordedAudio.src = data.url;
-				hasAudio();
-			})
-			.catch(error => console.log('Erro:', error));
+		audioURL = 'https://autolog.nacionaltransportes.com/anexos/6_audio_mql.ogg';
+		if(audioURL !== ''){
+			recordedAudio.src = audioURL;
+			hasAudio();
+		}
 	}
 });
